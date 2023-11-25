@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: node-app
+  template:
+    metadata:
+      labels:
+        app: node-app
+    spec:
+      containers:
+      - name: node-container
+        image: mudassir278/node:tagname
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/config
+        ports:
+        - containerPort: 80
+      volumes:
+        - name: config-volume
+          configMap:
+            # Provide the name of the ConfigMap containing the files you want
+            # to add to the container
+            name: node-app-cm
+
+
+# bello are the enviroment variable         
+        # env:
+        # # Define the environment variable
+        #   - name: DB_PORT
+        #     valueFrom:
+        #       configMapKeyRef:
+        #       # The ConfigMap containing the value you want to assign to SPECIAL_LEVEL_KEY
+        #         name: node-app-cm
+        #       # Specify the key associated with the value
+        #         key: db_port
+               

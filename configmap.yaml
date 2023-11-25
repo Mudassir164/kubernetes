@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: node-app-cm
+data:
+  # property-like keys; each key maps to a simple value
+  db_port: "3306"
+  ub_secret: "the quick brown fox "
